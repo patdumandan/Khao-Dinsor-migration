@@ -5,32 +5,27 @@ require(dplyr)
 
 kdata=read.csv(file.choose(), h=T)
 str(kdata)
-KD=kdata %>%
-  group_by(Species, Month, Day, Year)%>%
-  select(Count)%>%
-  mutate(daily = sum(kdata$Count, kdata$Day), na.rm=T)
+
 
 mean(kdata$Temperature)
 
 plot(kdata$Count~kdata$Barometric.Pressure)
 kdata$years = (kdata$Year - mean(kdata$Year))/(2 *sd(kdata$Year))
-kdata$temp = kdata$Temperature-mean(kdata$Temperature)
-kdata$uwind = (kdata$u.wind - mean(kdata$u.wind))/(2 *sd(kdata$u.wind))
-kdata$vwind = (kdata$v.wind - mean(kdata$v.wind))/(2 *sd(kdata$v.wind))
-kdata$cloud = (kdata$Cloud.Cover - mean(kdata$Cloud.Cover))/(2 *sd(kdata$Cloud.Cover))
-kdata$baro= (kdata$Barometric.Pressure - mean(kdata$Barometric.Pressure))/(2 *sd(kdata$Barometric.Pressure))
+kdata$temp = (kdata$temperature - mean(kdata$temperature))/(2 *sd(kdata$temperature))
+kdata$wind = (kdata$wind.speed - mean(kdata$wind.speed))/(2 *sd(kdata$wind.speed))
+kdata$baro= (kdata$barometric.pressure - mean(kdata$barometric.pressure))/(2 *sd(kdata$barometric.pressure))
 str(kdata)
 ###subset for BB######
-bb=subset(kdata, Species=="Black Baza", na.omit=T)
-plot(bb$Count~bb)
-kdata$Year = (kdata$Year - mean(kdata$Year))/(2 *sd(kdata$Year))
+bb=subset(kdata, Species=="BB")
+plot(bb$Count~bb$barometric.pressure)
+hist(bb$Count)
+mod_bb=glm(Count~years+temp+wind+baro, data=bb)
 
-mod_bb=glm(Count~years+temp+uwind+vwind+cloud+baro, data=bb)
-hist(day$Count)
+
 plot(day$Count~day$Day.No.)
 plot(day$Count~day$Site)
 mod1=glm(day$Count~day$Day.No.+day$Site, family="poisson")
-summary(mod1)
+summary(mod_bb)
 anova(mod1)
 rsq(mod1)
 #counts during the season, varied for each site
