@@ -78,3 +78,7 @@ ggplot(kdata, aes(x = met_wind, y = Count)) +
   )
 graph
 
+kdata2=kdata%>% 
+       mutate(species_id= case_when(Species=="Black Baza" ~ "BB", Species=="Chinese Sparrowhawk" ~ "CS", Species== "Oriental Honey-Buzzard" ~"OHB" ) )
+
+str(kdata2)
