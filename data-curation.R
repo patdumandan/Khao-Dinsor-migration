@@ -14,6 +14,7 @@ kdata=kdata%>%select(-X)%>%
 kdata$date <- as.Date(with(kdata, paste(Year, Month, Day,sep="-")), "%Y-%m-%d")
 
 kdata$julian<- format(kdata$date, "%j")
+kdata$julian=as.numeric(kdata$julian)
 
 #add meteorological wd vector####
 kdata=kdata%>%
