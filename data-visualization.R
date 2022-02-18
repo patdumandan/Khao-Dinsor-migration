@@ -37,7 +37,7 @@ csplot
 
 ohbplot=ggplot(ohb, aes(y=Count, x=julian))+
   geom_col()+
-  ylab("Number of Individuals")+ xlab("Julian Date")+ggtitle("Oriental Honey-buzzard")+
+  ylab("Number of Individuals")+ xlab("Julian Date")+ggtitle("Oriental Honey-Buzzard")+
   scale_x_continuous(limits=c(244.0, 320.0))+
   theme(plot.title=element_text(hjust=0,size=15),panel.border=element_blank(),
         panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
@@ -140,7 +140,7 @@ ohbplot=as.matrix(mod_ohb)
 ohbp=mcmc_areas(ohbplot, pars=c("tempsd","uwindsd", "vwindsd", "barosd","yearsd"
 ), prob=.80, prob_outer=0.95,
 point_est = "median")+ggplot2::scale_y_discrete(labels = c("Temperature", "U Wind", "V wind", "Barometric Pressure", "Year"))+vline_0(size = 0.25, color = "darkgray", linetype = 2)+
-  ggtitle ("Oriental Honey-buzzard")+ 
+  ggtitle ("Oriental Honey-Buzzard")+ 
   xlab("Coefficient Estimate")+
   theme(plot.title=element_text(hjust=0,size=15),panel.border=element_blank(),
         axis.line = element_line(colour = "black"),axis.text=element_text(color="black", family="serif"),
