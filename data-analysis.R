@@ -7,9 +7,9 @@ bb=kdata%>%filter(Species=="Black Baza")
 cs=kdata%>%filter(Species=="Chinese Sparrowhawk")
 ohb=kdata%>%filter(Species=="Oriental Honey-buzzard")
 
-#compare model performance when weather variables are lagged or not####
+#compare model performance when weather variables are lagged or not
 
-#Black Baza
+#Black Baza####
 
 mod_bb_lag=stan_glm(Count~yearsd+
                       lag_temp+lag_uwind+lag_vwind+lag_baro,
@@ -19,7 +19,7 @@ mod_bb=stan_glm(Count~yearsd+tempsd+uwindsd+vwindsd+barosd,
 loo(mod_bb)
 loo(mod_bb_lag)
 
-#Chinese sparrowhawk
+#Chinese sparrowhawk####
 
 mod_cs_lag=stan_glm(Count~yearsd+
                       lag_temp+lag_uwind+lag_vwind+lag_baro,
@@ -29,7 +29,7 @@ mod_cs=stan_glm(Count~yearsd+tempsd+uwindsd+vwindsd+barosd,
 loo(mod_cs)
 loo(mod_cs_lag)
 
-#oriental honey-buzzard
+#Oriental honey-buzzard####
 mod_ohb_lag=stan_glm(Count~yearsd+
                       lag_temp+lag_uwind+lag_vwind+lag_baro,
                     data=ohb, family = neg_binomial_2, offset=obs_effort)
